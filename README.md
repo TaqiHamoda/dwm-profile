@@ -18,7 +18,9 @@ This is my dwm profile. Still a work in progress but getting there
 This is a list of the packages required for this implementation to work on my current build.
 My build is an Asus Zenbook UM431D running Ubuntu Netboot 18.0.4
 
--) net-tools
--) dbus-x11
--) pulseaudio
--) libglib2.0-bin
+<ul>
+<li> net-tools
+<li> dbus-x11
+<li> pulseaudio
+<li> libglib2.0-bin
+</ul>
