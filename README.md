@@ -29,4 +29,5 @@ My build is an Asus Zenbook UM431D running Ubuntu Netboot 18.0.4
 <li> net-tools
 <li> pulseaudio
 <li> feh
+<li> xcompmgr
 </ul>
