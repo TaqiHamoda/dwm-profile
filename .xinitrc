@@ -1,6 +1,9 @@
 # Wallpaper
 feh --bg-scale ~/.dwm-profile/wallpapers/wallpaper-29.jpg &
 
+# st Transparency
+xcompmgr &
+
 # Status bar
 ~/.dwm-profile/dwm_bar.sh &
 

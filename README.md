@@ -2,6 +2,13 @@
 
 This is my dwm profile. Still a work in progress but getting there
 
+## Dot Files
+<ul>
+<li> .xinitrc belongs to ~/
+<li> settings.ini belongs to ~/.config/gtk-3.0/
+<ul>
+
+
 ## TODO:
 <ul>
 <li> Make the top bar parallelized using C
@@ -20,7 +27,6 @@ My build is an Asus Zenbook UM431D running Ubuntu Netboot 18.0.4
 
 <ul>
 <li> net-tools
-<li> dbus-x11
 <li> pulseaudio
-<li> libglib2.0-bin
+<li> feh
 </ul>
