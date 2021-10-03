@@ -14,7 +14,6 @@
 #include <X11/keysym.h>
 #include <X11/Xft/Xft.h>
 #include <X11/XKBlib.h>
-#include <arpa/inet.h>
 
 char *argv0;
 #include "arg.h"
@@ -82,7 +81,6 @@ typedef XftGlyphFontSpec GlyphFontSpec;
 typedef struct {
 	int tw, th; /* tty width and height */
 	int w, h; /* window width and height */
-	int x, y; /* window location */
 	int ch; /* char height */
 	int cw; /* char width  */
 	int mode; /* window state/mode flags */
@@ -103,9 +101,6 @@ typedef struct {
 		XVaNestedList spotlist;
 	} ime;
 	Draw draw;
-	Drawable xftdraw; /* buffer that xft draws to */
-	Drawable bgimg;   /* background image */
-	GC bggc;          /* Graphics Context for background */
 	Visual *vis;
 	XSetWindowAttributes attrs;
 	int scr;
@@ -156,7 +151,6 @@ static void ximinstantiate(Display *, XPointer, XPointer);
 static void ximdestroy(XIM, XPointer, XPointer);
 static int xicdestroy(XIC, XPointer, XPointer);
 static void xinit(int, int);
-static void bginit();
 static void cresize(int, int);
 static void xresize(int, int);
 static void xhints(void);
@@ -742,7 +736,6 @@ xresize(int col, int row)
 	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h,
 			DefaultDepth(xw.dpy, xw.scr));
 	XftDrawChange(xw.draw, xw.buf);
-	xw.xftdraw = XftDrawDrawable(xw.draw);
 	xclear(0, 0, win.w, win.h);
 
 	/* resize to new width */
@@ -827,9 +820,9 @@ xsetcolorname(int x, const char *name)
 void
 xclear(int x1, int y1, int x2, int y2)
 {
-	if (pseudotransparency)
-		XSetTSOrigin(xw.dpy, xw.bggc, -win.x, -win.y);
-	XFillRectangle(xw.dpy, xw.xftdraw, xw.bggc, x1, y1, x2-x1, y2-y1);
+	XftDrawRect(xw.draw,
+			&dc.col[IS_SET(MODE_REVERSE)? defaultfg : defaultbg],
+			x1, y1, x2-x1, y2-y1);
 }
 
 void
@@ -1165,7 +1158,6 @@ xinit(int cols, int rows)
 
 	/* Xft rendering context */
 	xw.draw = XftDrawCreate(xw.dpy, xw.buf, xw.vis, xw.cmap);
-	xw.xftdraw = XftDrawDrawable(xw.draw);
 
 	/* input methods */
 	if (!ximopen(xw.dpy)) {
@@ -1214,66 +1206,6 @@ xinit(int cols, int rows)
 	if (xsel.xtarget == None)
 		xsel.xtarget = XA_STRING;
 }
-
-
-/*
- * initialize background image
- */
-void
-bginit()
-{
-	uint32_t hdr[4], bgw, bgh, i = 0;
-	char buf[8], *image32;
-	FILE *bgf = fopen(bgfile, "rb");
-	XGCValues gcvalues;
-	XImage *bgxi;
-
-	if (bgf == NULL) die("could not load background image.\n");
-
-	if (fread(hdr, sizeof(*hdr), LEN(hdr), bgf) != LEN(hdr))
-		if (ferror(bgf))
-			die("fread:");
-		else
-			die("fread: Unexpected end of file\n");
-
-	if (memcmp("farbfeld", hdr, sizeof("farbfeld") - 1))
-		die("Invalid magic value");
-
-	bgw = ntohl(hdr[2]);
-	bgh = ntohl(hdr[3]);
-	image32 = (char *)malloc(bgw * bgh * 4 * sizeof(char));
-
-	while (i < bgh * bgw * 4) {
-		if (fread(buf, sizeof(*buf), LEN(buf), bgf) != LEN(buf))
-			if (ferror(bgf))
-				die("fread:");
-			else
-				die("fread: Unexpected end of file");
-
-		image32[i++] = buf[4]; /* convert 16 bit RGBA to 8 bit BGRA */
-		image32[i++] = buf[2];
-		image32[i++] = buf[0];
-		image32[i++] = buf[6];
-        }
-
-	bgxi = XCreateImage(xw.dpy, DefaultVisual(xw.dpy, xw.scr),
-		24, ZPixmap, 0, image32, bgw, bgh, 32, 0);
-	xw.bgimg = XCreatePixmap(xw.dpy, xw.win, bgw, bgh,
-                        DefaultDepth(xw.dpy, xw.scr));
-	XPutImage(xw.dpy, xw.bgimg, dc.gc, bgxi, 0, 0, 0, 0, bgw, bgh);
-	XDestroyImage(bgxi);
-	memset(&gcvalues, 0, sizeof(gcvalues));
-	xw.bggc = XCreateGC(xw.dpy, xw.win, 0, &gcvalues);
-	XSetTile(xw.dpy, xw.bggc, xw.bgimg);
-	XSetFillStyle(xw.dpy, xw.bggc, FillTiled);
-	if (pseudotransparency) {
-		XWindowAttributes xwa;
-		XGetWindowAttributes(xw.dpy, xw.win, &xwa);
-		win.x = xwa.x;
-		win.y = xwa.y;
-	}
-}
-
 
 int
 xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x, int y)
@@ -1515,10 +1447,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 		xclear(winx, winy + win.ch, winx + width, win.h);
 
 	/* Clean up the region we want to draw to. */
-	if (bg == &dc.col[defaultbg])
-		xclear(winx, winy, winx + width, winy + win.ch);
-	else
-		XftDrawRect(xw.draw, bg, winx, winy, width, win.ch);
+	XftDrawRect(xw.draw, bg, winx, winy, width, win.ch);
 
 	/* Set the clip region because Xft is sometimes dirty. */
 	r.x = 0;
@@ -1926,19 +1855,8 @@ cmessage(XEvent *e)
 void
 resize(XEvent *e)
 {
-	if (pseudotransparency) {
-		if (e->xconfigure.width == win.w &&
-			e->xconfigure.height == win.h &&
-			e->xconfigure.x == win.x && e->xconfigure.y == win.y)
-			return;
-
-		win.x = e->xconfigure.x;
-		win.y = e->xconfigure.y;
-	} else {
-		if (e->xconfigure.width == win.w &&
-			e->xconfigure.height == win.h)
-			return;
-	}
+	if (e->xconfigure.width == win.w && e->xconfigure.height == win.h)
+		return;
 
 	cresize(e->xconfigure.width, e->xconfigure.height);
 }
@@ -2123,7 +2041,6 @@ run:
 	rows = MAX(rows, 1);
 	tnew(cols, rows);
 	xinit(cols, rows);
-	bginit();
 	xsetenv();
 	selinit();
 	run();
