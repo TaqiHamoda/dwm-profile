@@ -5,10 +5,11 @@
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int minwsz    = 20;       /* Minimal heigt of a client for smfact */
+static const unsigned int gappx     = 10;        /* gap pixel between windows */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = { "monospace:size=10" };
+static const char *fonts[]          = { "monospace:size=12" };
+static const char dmenufont[]       = { "monospace:size=12" };
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -29,7 +30,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	{ "Gimp",     NULL,       NULL,       0,            0,           -1 },
 	{ "Firefox",  NULL,       NULL,       0,            0,           -1 },
 };
 
@@ -52,9 +53,9 @@ static const Layout layouts[] = {
 #define XF86MonBrightnessDown 0x1008ff02 // Decrease brightness
 #define XF86MonBrightnessUp   0x1008ff03 // Increase brightness
 
-#define XF86AudioLowerVolume 0x1008ff11  // Lower volume button
-#define XF86AudioMute        0x1008ff12  // Mute button
-#define XF86AudioRaiseVolume 0x1008ff13  // Increase volume button
+#define XF86AudioLowerVolume  0x1008ff11  // Lower volume button
+#define XF86AudioMute         0x1008ff12  // Mute button
+#define XF86AudioRaiseVolume  0x1008ff13  // Increase volume button
 // End of User Definitions
 
 #define MODKEY Mod4Mask

@@ -12,7 +12,7 @@ dwm_networkmanager () {
     QUALITY="$(iwconfig | grep Quality | awk '{print $2;}')"
     CONNAME="$(echo ${RATE} | sed 's/Rate=//g')${UNIT} $(echo ${QUALITY} | sed 's/Quality=//g')"
 
-    PRIVATE=$(hostname -I | awk '{print $1;}')
+    PRIVATE=$(ip a | grep 'inet ' | awk '{print $2;}' | tail -n 1)
 
     echo "${SEP1}NET ${CONNAME} ${PRIVATE}${SEP2}"
 }

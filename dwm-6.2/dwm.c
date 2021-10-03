@@ -1824,30 +1824,30 @@ tile(Monitor *m)
 	if (n > m->nmaster)
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 	else
-		mw = m->ww;
-	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+		mw = m->ww - gappx;
+	for (i = 0, my = ty = gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
-			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
-			my += HEIGHT(c);
+			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - gappx;
+			resize(c, m->wx + gappx, m->wy + my, mw - (2*c->bw) - gappx, h - (2*c->bw), 0);
+			my += HEIGHT(c) + gappx;
 		} else {
 			smh = m->mh * m->smfact;
 			if(!(nexttiled(c->next)))
-				h = (m->wh - ty) / (n - i);
+				h = (m->wh - ty) / (n - i) - gappx;
 			else
-				h = (m->wh - smh - ty) / (n - i);
+				h = (m->wh - smh - ty) / (n - i) - gappx;
 			if(h < minwsz) {
 				c->isfloating = True;
 				XRaiseWindow(dpy, c->win);
-				resize(c, m->mx + (m->mw / 2 - WIDTH(c) / 2), m->my + (m->mh / 2 - HEIGHT(c) / 2), m->ww - mw - (2*c->bw), h - (2*c->bw), False);
-				ty -= HEIGHT(c);
+				resize(c, m->mx + (m->mw / 2 - WIDTH(c) / 2) + gappx, m->my + (m->mh / 2 - HEIGHT(c) / 2), m->ww - mw - 2*gappx - (2*c->bw), h - (2*c->bw), False);
+				ty -= HEIGHT(c) + gappx;
 			}
 			else
-				resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), False);
+				resize(c, m->wx + mw + gappx, m->wy + ty, m->ww - mw - 2*gappx - (2*c->bw), h - (2*c->bw), False);
 			if(!(nexttiled(c->next)))
-				ty += HEIGHT(c) + smh;
+				ty += HEIGHT(c) + smh + gappx;
 			else
-				ty += HEIGHT(c);
+				ty += HEIGHT(c) + gappx;
 
 		}
 }
