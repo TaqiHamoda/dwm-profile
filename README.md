@@ -6,6 +6,7 @@ This is my dwm profile. Still a work in progress but getting there
 <ul>
 <li> .xinitrc belongs to ~/
 <li> settings.ini belongs to ~/.config/gtk-3.0/
+<li> slock@.service /etc/systemd/system/
 <ul>
 
 
