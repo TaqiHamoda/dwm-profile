@@ -2,14 +2,13 @@
 
 This is my dwm profile. Still a work in progress but getting there
 
-## Dot Files
+## Dot Files:
 <ul>
 <li> .xinitrc belongs to ~/
 <li> settings.ini belongs to ~/.config/gtk-3.0/
 <li> slock.service belongs to /etc/systemd/system/
-<ul>
-
-
+</ul>
+  
 ## TODO:
 <ul>
 <li> Make the top bar parallelized using C
