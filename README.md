@@ -23,7 +23,9 @@ My build is an Asus Zenbook UM431D running Arch Linux
 <ul>
 <li> net-tools
 <li> pulseaudio
+<li> pulseaudio-alsa
 <li> feh
+<li> acpilight
 <li> xcompmgr
 <li> colorz (optional but helps with color scheme)
 <li> ttf-ubuntu-font-family

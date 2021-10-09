@@ -724,7 +724,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
+		drw_setscheme(drw, scheme[SchemeSel]);
 		sw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
 		drw_text(drw, m->ww - sw, 0, sw, bh, 0, stext, 0);
 	}
@@ -750,6 +750,7 @@ drawbar(Monitor *m)
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
+	/* Window Title */
 	if ((w = m->ww - sw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
@@ -1310,7 +1311,8 @@ increase_brightness(const Arg *arg){
 	int pid = fork();
 
 	if(pid == 0){
-		char *argv[] = { "pactl", "set-sink-mute", MAIN_AUDIO_CHANNEL, "toggle", 0 };
+		// xbacklight -inc 5
+		char *argv[] = { "xbacklight", "-inc", "5", 0 };
 		
 		int ret = execvp(argv[0], argv);  // Should exit on success
 		exit(ret);  // Make sure there is no zombies
@@ -1323,7 +1325,7 @@ decrease_brightness(const Arg *arg){
 	int pid = fork();
 
 	if(pid == 0){
-		char *argv[] = { "pactl", "set-sink-mute", MAIN_AUDIO_CHANNEL, "toggle", 0 };
+		char *argv[] = { "xbacklight", "-dec", "5", 0 };
 		
 		int ret = execvp(argv[0], argv);  // Should exit on success
 		exit(ret);  // Make sure there is no zombies

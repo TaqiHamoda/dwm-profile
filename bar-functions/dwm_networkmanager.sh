@@ -14,7 +14,7 @@ dwm_networkmanager () {
 
     PRIVATE=$(ip a | grep 'inet ' | awk '{print $2;}' | tail -n 1)
 
-    echo "${SEP1}NET ${CONNAME} ${PRIVATE}${SEP2}"
+    echo "${SEP1} ${CONNAME} ${PRIVATE}${SEP2}"
 }
 
 dwm_networkmanager
