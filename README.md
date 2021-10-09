@@ -18,7 +18,7 @@ This is my dwm profile. Still a work in progress but getting there
   
 ## Packages Required:
 This is a list of the packages required for this implementation to work on my current build.
-My build is an Asus Zenbook UM431D running Arch
+My build is an Asus Zenbook UM431D running Arch Linux
 
 <ul>
 <li> net-tools
@@ -26,4 +26,5 @@ My build is an Asus Zenbook UM431D running Arch
 <li> feh
 <li> xcompmgr
 <li> colorz (optional but helps with color scheme)
+<li> ttf-ubuntu-font-family
 </ul>
