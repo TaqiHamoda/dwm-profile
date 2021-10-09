@@ -12,8 +12,7 @@ This is my dwm profile. Still a work in progress but getting there
 ## TODO:
 <ul>
 <li> Make the top bar parallelized using C
-<li> Customize the top bar using Polybar
-<li> Find a way to adjust screen brightness through keybindings
+<li> Fix screen brightness keybindings
 </ul>
   
 ## Packages Required:
