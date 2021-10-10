@@ -17,7 +17,7 @@ static const char dmenufont[]       = { "ubuntumono:size=15" };
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#888888";
 static const char col_gray3[]       = "#f1f1f1";
-static const char col_other[]       = "#888888";
+static const char col_other[]       = "#000000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray2, col_gray1, col_gray2 },
