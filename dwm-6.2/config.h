@@ -10,6 +10,8 @@ static const unsigned int gappx     = 10;       /* gap pixel between windows */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int barheight	    = 1;        /* adds extra height to bar */
+static const double activeopacity   = 1.00f;    /* Window opacity when it's focused (0 <= opacity <= 1) */
+static const double inactiveopacity = 0.85f;    /* Window opacity when it's inactive (0 <= opacity <= 1) */
 static const char *fonts[]          = { "ubuntumono:size=13" };
 static const char dmenufont[]       = { "ubuntumono:size=15" };
 static const char col_gray1[]       = "#222222";
