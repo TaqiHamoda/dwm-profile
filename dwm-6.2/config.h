@@ -46,8 +46,8 @@ static const int lockfullscreen = 0;  /* 1 will force focus on the fullscreen wi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[T]",      tile },    /* first entry is default */
+	{ "<N>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
 
