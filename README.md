@@ -8,13 +8,12 @@ This is my dwm profile. Still a work in progress but getting there
 <li> settings.ini belongs to ~/.config/gtk-3.0/
 <li> slock.service belongs to /etc/systemd/system/
 </ul>
-  
+
 ## TODO:
 <ul>
-<li> Make the top bar parallelized using C
 <li> Fix screen brightness keybindings
 </ul>
-  
+
 ## Packages Required:
 This is a list of the packages required for this implementation to work on my current build.
 My build is an Asus Zenbook UM431D running Arch Linux
