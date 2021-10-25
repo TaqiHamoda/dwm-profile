@@ -5,7 +5,7 @@ feh --bg-scale ~/.dwm-profile/wallpapers/wallpaper-029.jpg &
 xcompmgr &
 
 # Status bar
-~/.dwm-profile/dwm_bar.sh &
+~/.dwm-profile/bar.sh &
 
 # Start dwm
 exec dbus-launch --exit-with-session dwm

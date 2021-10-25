@@ -58,15 +58,16 @@ dwm_date () {
 # Function for getting network info
 # Dependencies: iwconfig
 dwm_networkmanager () {
-    RATE="$(iwconfig | grep Rate | awk '{print $2;}')"
-    UNIT="$(iwconfig | grep Rate | awk '{print $3;}')"
+#    RATE="$(iwconfig | grep Rate | awk '{print $2;}')"
+#    UNIT="$(iwconfig | grep Rate | awk '{print $3;}')"
     QUALITY="$(iwconfig | grep Quality | awk '{print $2;}' | sed 's/Quality=//g')"
-    CONNAME="$(echo ${RATE} | sed 's/Rate=//g')${UNIT} $(echo ${QUALITY})"
+#    CONNAME="$(echo ${RATE} | sed 's/Rate=//g')${UNIT} $(echo ${QUALITY})"
 
     NAME=$(iwconfig | grep ESSID: | awk '{print $4;}' | sed 's/ESSID://g' | sed 's/"//g')
     PRIVATE=$(ip a | grep 'inet ' | awk '{print $2;}' | tail -n 1)
 
-    printf  "${SEP1} ${CONNAME} ${PRIVATE} ${NAME}${SEP2}"
+#    printf  "${SEP1} ${CONNAME} ${PRIVATE} ${NAME}${SEP2}"
+    printf  "${SEP1} ${QUALITY} ${PRIVATE} ${NAME}${SEP2}"
 }
 
 
