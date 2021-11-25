@@ -2,6 +2,8 @@
 
 This is my dwm profile. Still a work in progress but getting there
 
+<img src="Preview.png">
+
 ## Dot Files:
 <ul>
 <li> .xinitrc belongs to ~/
