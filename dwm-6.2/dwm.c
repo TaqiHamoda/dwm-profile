@@ -1254,7 +1254,7 @@ prev_track(const Arg *arg){
 	if(pid == 0){
 		char *cmd = "org.mpris.MediaPlayer2.Player.Previous";
 		char *argv[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", cmd, 0 };
-		
+
 		int ret = execvp(argv[0], argv);  // Should exit on success
 		exit(ret);  // Make sure there is no zombies
 	}
@@ -1268,7 +1268,7 @@ play_track(const Arg *arg){
 	if(pid == 0){
 		char *cmd = "org.mpris.MediaPlayer2.Player.PlayPause";
 		char *argv[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", cmd, 0 };
-		
+
 		int ret = execvp(argv[0], argv);  // Should exit on success
 		exit(ret);  // Make sure there is no zombies
 	}
@@ -1281,7 +1281,7 @@ increase_volume(const Arg *arg){
 
 	if(pid == 0){
 		char *argv[] = { "pactl", "set-sink-volume", MAIN_AUDIO_CHANNEL, "+5%", 0 };
-		
+
 		int ret = execvp(argv[0], argv);  // Should exit on success
 		exit(ret);  // Make sure there is no zombies
 	}

@@ -50,7 +50,7 @@ dwm_battery () {
 # Date is formatted like like this: Saturday 23 October, 13:00:33
 dwm_date () {
     printf "%s" "$SEP1"
-    printf "%s" "$(date "+%A %d %B, %T")"
+    printf "%s" "$(date "+%A %B %d, %T")"
 #    printf "%s\n" "$SEP2"
 }
 

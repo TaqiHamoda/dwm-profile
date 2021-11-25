@@ -14,6 +14,7 @@ For slock to work you need to run: sudo groupadd nogroup
 
 ## TODO:
 <ul>
+<li> Remove user defined key bindings from dwm.c and put them in config.h
 <li> Fix screen brightness keybindings
 </ul>
 
@@ -34,6 +35,8 @@ My build is an Asus Zenbook UM431D running Arch Linux
 <li> feh
 <li> acpilight
 <li> xcompmgr
-<li> colorz (optional but helps with color scheme)
 <li> ttf-ubuntu-font-family
+<li> scrot
+<li> colorz (optional but helps with color scheme)
+<li> xorg-xev (optional but helps with figuring X11 Keycodes)
 </ul>
