@@ -2,43 +2,40 @@
 
 This is my dwm profile. Still a work in progress but getting there
 
-<img src="Preview.png">
+![DWM Environment](https://github.com/TaqieldinHamoda/dwm-profile/blob/main/Preview.png "A Preview of my DWM Environment")
 
 ## Dot Files:
-<ul>
-<li> .xinitrc belongs to `~/`
-<li> settings.ini belongs to `~/.config/gtk-3.0/`
-<li> slock.service belongs to `/etc/systemd/system/`
-</ul>
+- .xinitrc belongs to `~/`
+- settings.ini belongs to `~/.config/gtk-3.0/`
+- slock.service belongs to `/etc/systemd/system/`
 
 ## Slock:
-For slock to work you need to run: sudo groupadd nogroup
+For slock to work you need to run:
+```
+sudo groupadd nogroup
+```
 
 ## TODO:
-<ul>
-<li> Remove user defined key bindings from `dwm.c` and put them in `config.h`
-<li> Fix screen brightness keybindings
-</ul>
+- Remove user defined key bindings from `dwm.c` and put them in `config.h`
+- Fix screen brightness keybindings
 
 ## Packages Required:
 This is a list of the packages required for this implementation to work on my current build.
 My build is an Asus Zenbook UM431D running Arch Linux
 
-<ul>
-<li> xorg-server
-<li> xorg-xinit
-<li> base-devel
-<li> xorg-xsetroot
-<li> net-tools
-<li> wireless_tools
-<li> pulseaudio
-<li> alsa-utils
-<li> pulseaudio-alsa
-<li> feh
-<li> acpilight
-<li> xcompmgr
-<li> ttf-ubuntu-font-family
-<li> scrot
-<li> colorz (optional but helps with color scheme)
-<li> xorg-xev (optional but helps with figuring X11 Keycodes)
-</ul>
+- xorg-server
+- xorg-xinit
+- base-devel
+- xorg-xsetroot
+- net-tools
+- wireless_tools
+- pulseaudio
+- alsa-utils
+- pulseaudio-alsa
+- feh
+- acpilight
+- xcompmgr
+- ttf-ubuntu-font-family
+- scrot
+- colorz (optional but helps with color scheme)
+- xorg-xev (optional but helps with figuring X11 Keycodes)
