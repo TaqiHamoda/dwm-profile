@@ -6,9 +6,9 @@ This is my dwm profile. Still a work in progress but getting there
 
 ## Dot Files:
 <ul>
-<li> .xinitrc belongs to ~/
-<li> settings.ini belongs to ~/.config/gtk-3.0/
-<li> slock.service belongs to /etc/systemd/system/
+<li> .xinitrc belongs to `~/`
+<li> settings.ini belongs to `~/.config/gtk-3.0/`
+<li> slock.service belongs to `/etc/systemd/system/`
 </ul>
 
 ## Slock:
@@ -16,7 +16,7 @@ For slock to work you need to run: sudo groupadd nogroup
 
 ## TODO:
 <ul>
-<li> Remove user defined key bindings from dwm.c and put them in config.h
+<li> Remove user defined key bindings from `dwm.c` and put them in `config.h`
 <li> Fix screen brightness keybindings
 </ul>
 
