@@ -16,7 +16,6 @@ sudo groupadd nogroup
 ```
 
 ## TODO:
-- Remove user defined key bindings from `dwm.c` and put them in `config.h`
 - Fix screen brightness keybindings
 
 ## Packages Required:

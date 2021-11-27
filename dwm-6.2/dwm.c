@@ -57,9 +57,6 @@
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
 #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
-#define MUSIC_DBUS_DEST         "org.mpris.MediaPlayer2.spotify"
-#define MUSIC_DBUS_PATH         "/org/mpris/MediaPlayer2"
-#define MAIN_AUDIO_CHANNEL      "0"
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
@@ -191,18 +188,6 @@ static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
 static void opacity(Client *c, double opacity);
-
-// Begin User defined functions
-static void next_track(const Arg *arg);          // Play next track
-static void prev_track(const Arg *arg);          // Go to beginning or previous track
-static void play_track(const Arg *arg);          // Play or pause current track
-static void increase_volume(const Arg *arg);     // Increase volume by 5%
-static void toggle_volume(const Arg *arg);       // Toggle mute
-static void decrease_volume(const Arg *arg);     // Decrease volume by 5%
-static void increase_brightness(const Arg *arg); // Increase brightness
-static void decrease_brightness(const Arg *arg); // Decrease brightness
-// End User defined functions
-
 static void pop(Client *);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
@@ -1229,116 +1214,6 @@ opacity(Client *c, double opacity)
 				1);
 	} else
 		XDeleteProperty(dpy, c->win, netatom[NetWMWindowsOpacity]);
-}
-
-void
-next_track(const Arg *arg)
-{
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		char *cmd = "org.mpris.MediaPlayer2.Player.Next";
-		char *argv[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", cmd, 0 };
-
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
-}
-
-void
-prev_track(const Arg *arg){
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		char *cmd = "org.mpris.MediaPlayer2.Player.Previous";
-		char *argv[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", cmd, 0 };
-
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
-}
-
-void
-play_track(const Arg *arg){
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		char *cmd = "org.mpris.MediaPlayer2.Player.PlayPause";
-		char *argv[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", cmd, 0 };
-
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
-}
-
-void
-increase_volume(const Arg *arg){
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		char *argv[] = { "pactl", "set-sink-volume", MAIN_AUDIO_CHANNEL, "+5%", 0 };
-
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
-}
-
-void
-decrease_volume(const Arg *arg){
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		char *argv[] = { "pactl", "set-sink-volume", MAIN_AUDIO_CHANNEL, "-5%", 0 };
-		
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
-}
-
-void
-toggle_volume(const Arg *arg){
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		char *argv[] = { "pactl", "set-sink-mute", MAIN_AUDIO_CHANNEL, "toggle", 0 };
-		
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
-}
-
-// TODO: Make the brightness functions work
-void
-increase_brightness(const Arg *arg){
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		// xbacklight -inc 5
-		char *argv[] = { "xbacklight", "-inc", "5", 0 };
-		
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
-}
-
-void
-decrease_brightness(const Arg *arg){
-	// Fork a child process to run the command
-	int pid = fork();
-
-	if(pid == 0){
-		char *argv[] = { "xbacklight", "-dec", "5", 0 };
-		
-		int ret = execvp(argv[0], argv);  // Should exit on success
-		exit(ret);  // Make sure there is no zombies
-	}
 }
 
 void

@@ -53,14 +53,18 @@ static const Layout layouts[] = {
 
 /* key definitions */
 
-// Begining of User Definitions
-#define XF86MonBrightnessDown 0x1008ff02 // Decrease brightness
-#define XF86MonBrightnessUp   0x1008ff03 // Increase brightness
+/* Begining of User Definitions */
+#define XF86MonBrightnessDown 0x1008ff02  /* Decrease brightness */
+#define XF86MonBrightnessUp   0x1008ff03  /* Increase brightness */
 
-#define XF86AudioLowerVolume  0x1008ff11  // Lower volume button
-#define XF86AudioMute         0x1008ff12  // Mute button
-#define XF86AudioRaiseVolume  0x1008ff13  // Increase volume button
-// End of User Definitions
+#define XF86AudioLowerVolume  0x1008ff11  /* Lower volume button */
+#define XF86AudioMute         0x1008ff12  /* Mute button */
+#define XF86AudioRaiseVolume  0x1008ff13  /* Increase volume button */
+
+#define MUSIC_DBUS_DEST       "org.mpris.MediaPlayer2.spotify"
+#define MUSIC_DBUS_PATH       "/org/mpris/MediaPlayer2"
+#define MAIN_AUDIO_CHANNEL    "0"
+/* End of User Definitions */
 
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -79,6 +83,18 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
 static const char *scrotcmd[] = { "bash", "-c", "scrot -e 'mv $f ~/Pictures/'", NULL };
 
+/* keybindings commands */
+static const char *inc_brightcmd[] = { "xbacklight", "-inc", "5", NULL };
+static const char *dec_brightcmd[] = { "xbacklight", "-dec", "5", NULL };
+
+static const char *inc_volcmd[] = { "pactl", "set-sink-volume", MAIN_AUDIO_CHANNEL, "+5%", NULL };
+static const char *dec_volcmd[] = { "pactl", "set-sink-volume", MAIN_AUDIO_CHANNEL, "-5%", NULL };
+static const char *toggle_volcmd[] = { "pactl", "set-sink-mute", MAIN_AUDIO_CHANNEL, "toggle", NULL };
+
+static const char *next_trackcmd[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", "org.mpris.MediaPlayer2.Player.Next", NULL };
+static const char *prev_trackcmd[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", "org.mpris.MediaPlayer2.Player.Previous", NULL };
+static const char *toggle_trackcmd[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", "org.mpris.MediaPlayer2.Player.PlayPause", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
@@ -95,16 +111,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,      setsmfact,      {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_l,      setsmfact,      {.f = -0.05} },
 
-	// Beginning of User-Defined key bindings
-	{ MODKEY,                       XF86AudioLowerVolume,  play_track,          {0} },
-	{ MODKEY,                       XF86AudioMute,         prev_track,          {0} },
-	{ MODKEY,                       XF86AudioRaiseVolume,  next_track,          {0} },
-	{ NoEventMask,                  XF86AudioLowerVolume,  decrease_volume,     {0} },
-	{ NoEventMask,                  XF86AudioMute,         toggle_volume,       {0} },
-	{ NoEventMask,                  XF86AudioRaiseVolume,  increase_volume,     {0} },
-	{ NoEventMask,                  XF86MonBrightnessDown, increase_brightness, {0} },
-	{ NoEventMask,                  XF86MonBrightnessUp,   decrease_brightness, {0} },
-	// End of User-Defined key bindings
+	/* Beginning of User-Defined key bindings */
+	{ MODKEY,                       XF86AudioLowerVolume,  spawn,    {.v = toggle_trackcmd } },
+	{ MODKEY,                       XF86AudioMute,         spawn,    {.v = prev_trackcmd } },
+	{ MODKEY,                       XF86AudioRaiseVolume,  spawn,    {.v = next_trackcmd } },
+	{ NoEventMask,                  XF86AudioLowerVolume,  spawn,    {.v = dec_volcmd } },
+	{ NoEventMask,                  XF86AudioMute,         spawn,    {.v = toggle_volcmd } },
+	{ NoEventMask,                  XF86AudioRaiseVolume,  spawn,    {.v = inc_volcmd } },
+	{ NoEventMask,                  XF86MonBrightnessDown, spawn,    {.v = inc_brightcmd } },
+	{ NoEventMask,                  XF86MonBrightnessUp,   spawn,    {.v = dec_brightcmd } },
+	/* End of User-Defined key bindings */
 
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
