@@ -38,3 +38,4 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - scrot
 - colorz (optional but helps with color scheme)
 - xorg-xev (optional but helps with figuring X11 Keycodes)
+- wmname (needed to make Java programs work on dwm)

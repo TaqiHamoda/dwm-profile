@@ -1,5 +1,5 @@
 # Wallpaper
-feh --bg-scale ~/.dwm-profile/wallpapers/wallpaper-029.jpg &
+feh --bg-scale ~/.dwm-profile/wallpapers/wallpaper-021.jpg &
 
 # st Transparency
 xcompmgr &
@@ -8,4 +8,5 @@ xcompmgr &
 ~/.dwm-profile/bar.sh &
 
 # Start dwm
+wmname compiz
 exec dbus-launch --exit-with-session dwm
