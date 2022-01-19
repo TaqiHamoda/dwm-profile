@@ -1,5 +1,5 @@
 # Wallpaper
-feh --bg-scale ~/.dwm-profile/wallpapers/wallpaper-021.jpg &
+feh --bg-scale ~/.dwm-profile/wallpapers/wallpaper-157.jpg &
 
 # st Transparency
 xcompmgr &
