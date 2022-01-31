@@ -63,7 +63,6 @@ static const Layout layouts[] = {
 
 #define MUSIC_DBUS_DEST       "org.mpris.MediaPlayer2.spotify"
 #define MUSIC_DBUS_PATH       "/org/mpris/MediaPlayer2"
-#define MAIN_AUDIO_CHANNEL    "0"
 /* End of User Definitions */
 
 #define MODKEY Mod4Mask
@@ -87,9 +86,9 @@ static const char *scrotcmd[] = { "bash", "-c", "scrot -e 'mv $f ~/Pictures/'", 
 static const char *inc_brightcmd[] = { "xbacklight", "-inc", "5", NULL };
 static const char *dec_brightcmd[] = { "xbacklight", "-dec", "5", NULL };
 
-static const char *inc_volcmd[] = { "pactl", "set-sink-volume", MAIN_AUDIO_CHANNEL, "+5%", NULL };
-static const char *dec_volcmd[] = { "pactl", "set-sink-volume", MAIN_AUDIO_CHANNEL, "-5%", NULL };
-static const char *toggle_volcmd[] = { "pactl", "set-sink-mute", MAIN_AUDIO_CHANNEL, "toggle", NULL };
+static const char *inc_volcmd[] = { "amixer", "set", "Master", "5%+", NULL };
+static const char *dec_volcmd[] = { "amixer", "set", "Master", "5%-", NULL };
+static const char *toggle_volcmd[] = { "amixer", "set", "Master", "toggle", NULL };
 
 static const char *next_trackcmd[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", "org.mpris.MediaPlayer2.Player.Next", NULL };
 static const char *prev_trackcmd[] = { "gdbus", "call", "--session", "--dest", MUSIC_DBUS_DEST, "--object-path", MUSIC_DBUS_PATH, "--method", "org.mpris.MediaPlayer2.Player.Previous", NULL };
