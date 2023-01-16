@@ -32,20 +32,20 @@ gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 This is a list of the packages required for this implementation to work on my current build.
 My build is an Asus Zenbook UM431D running Arch Linux
 
-- xorg-server
-- xorg-xinit
-- base-devel
-- xorg-xsetroot
-- net-tools
-- wireless_tools
-- pulseaudio
-- alsa-utils
-- pulseaudio-alsa
-- feh
-- acpilight
-- xcompmgr
-- ttf-ubuntu-font-family
-- scrot
-- colorz (optional but helps with color scheme)
-- xorg-xev (optional but helps with figuring X11 Keycodes)
-- wmname (needed to make Java programs work on dwm)
+- `xorg-server`
+- `xorg-xinit`
+- `base-devel`
+- `xorg-xsetroot`
+- `net-tools`
+- `wireless_tools`
+- `pulseaudio`
+- `alsa-utils`
+- `pulseaudio-alsa`
+- `feh`
+- `acpilight`
+- `xcompmgr`
+- `ttf-ubuntu-font-family`
+- `scrot`
+- `colorz` (optional but helps with color scheme)
+- `xorg-xev` (optional but helps with figuring X11 Keycodes)
+- `wmname` (needed to make Java programs work on dwm)
