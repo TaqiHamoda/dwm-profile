@@ -15,8 +15,18 @@ For slock to work you need to run:
 sudo groupadd nogroup
 ```
 
+## Dark Mode:
+To enable dark mode on all GTK applications, run the following command:
+
+```
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+```
+
 ## TODO:
+- Figure out how to install proprietery drivers
 - Fix screen brightness keybindings
+- Add a login/lock screen
+- Pimp up the grub menu
 
 ## Packages Required:
 This is a list of the packages required for this implementation to work on my current build.
