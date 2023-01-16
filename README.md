@@ -23,10 +23,10 @@ gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 ```
 
 ## TODO:
--[] Figure out how to install proprietery drivers
--[] Fix screen brightness keybindings
--[] Add a login/lock screen
--[] Pimp up the grub menu
+- [] Figure out how to install proprietery drivers
+- [] Fix screen brightness keybindings
+- [] Add a login/lock screen
+- [] Pimp up the grub menu
 
 ## Packages Required:
 This is a list of the packages required for this implementation to work on my current build.
