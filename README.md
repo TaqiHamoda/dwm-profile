@@ -27,6 +27,7 @@ gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 - [ ] Fix screen brightness keybindings
 - [ ] Add a login/lock screen
 - [ ] Pimp up the grub menu
+- [ ] Migrate keybindings to use [xbindkeys](https://wiki.archlinux.org/title/Xbindkeys)
 - [ ] Migrate to AwesomeWM and stop using suckless tools
 
 ## Packages Required:

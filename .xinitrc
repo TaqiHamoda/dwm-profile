@@ -9,4 +9,6 @@ xcompmgr &
 
 # Start dwm
 wmname compiz
-exec dbus-launch --exit-with-session dwm
+# --exit-with-session causes the GUI to lock. You need to compile dbus with x11 for it to work
+#exec dbus-launch --exit-with-session dwm
+exec dbus-launch dwm
