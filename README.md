@@ -5,9 +5,11 @@ This is my dwm profile. Still a work in progress but getting there
 ![DWM Environment](https://github.com/TaqieldinHamoda/dwm-profile/blob/main/Preview.png "A Preview of my DWM Environment")
 
 ## Dot Files:
-- .xinitrc belongs to `~/`
-- settings.ini belongs to `~/.config/gtk-3.0/`
-- slock.service belongs to `/etc/systemd/system/`
+- `.bashrc` belongs to `~/`
+- `.xinitrc` belongs to `~/`
+- `.nanorc` belongs to `~/`
+- `settings.ini` belongs to `~/.config/gtk-3.0/`
+- `slock.service` belongs to `/etc/systemd/system/`
 
 ## Slock:
 For slock to work you need to run:
@@ -24,6 +26,7 @@ gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 
 ## TODO:
 - [x] Figure out how to install proprietery drivers
+- [ ] Colorize `.bashrc`
 - [ ] Fix screen brightness keybindings
 - [ ] Add a login/lock screen
 - [ ] Pimp up the grub menu
@@ -36,8 +39,9 @@ My build is an Asus Zenbook UM431D running Arch Linux
 
 - `xorg-server`
 - `xorg-xinit`
-- `base-devel`
 - `xorg-xsetroot`
+- `xorg-xrandr`
+- `base-devel`
 - `net-tools`
 - `wireless_tools`
 - `pulseaudio`
@@ -48,6 +52,7 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `xcompmgr`
 - `ttf-ubuntu-font-family`
 - `scrot`
+- `nano-syntax-highlighting`
 - `colorz` (optional but helps with color scheme)
 - `xorg-xev` (optional but helps with figuring X11 Keycodes)
 - `wmname` (needed to make Java programs work on dwm)
