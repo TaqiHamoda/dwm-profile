@@ -24,14 +24,18 @@ To enable dark mode on all GTK applications, run the following command:
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 ```
 
-## TODO:
-- [x] Figure out how to install proprietery drivers
-- [ ] Colorize `.bashrc`
-- [ ] Fix screen brightness keybindings
-- [ ] Add a login/lock screen
-- [ ] Pimp up the grub menu
-- [ ] Migrate keybindings to use [xbindkeys](https://wiki.archlinux.org/title/Xbindkeys)
-- [ ] Migrate to AwesomeWM and stop using suckless tools
+## Xbacklight keybindings
+By default, only `root` can change the brightness using `xbacklight`. To allow regular users to change the brightness, you must add the user to the `video` group and create a udev rule as follows:
+
+```
+# Add user to video group
+sudo usermod -a -G video username
+```
+
+```
+# Edit /etc/udev/rules.d/backlight.rules
+ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"
+```
 
 ## Packages Required:
 This is a list of the packages required for this implementation to work on my current build.
@@ -50,11 +54,13 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `feh`
 - `acpilight`
 - `xcompmgr`
-- `ttf-ubuntu-font-family`
 - `scrot`
 - `nano-syntax-highlighting`
-- `colorz` (optional but helps with color scheme)
-- `xorg-xev` (optional but helps with figuring X11 Keycodes)
+- `noto-fonts`
+- `ttf-jetbrains-mono-nerd`
+- `ttf-material-icons-git`
 - `wmname` (needed to make Java programs work on dwm)
 - `mkinitcpio-firmware` (drivers that are not typically shipped with `linux-firmware`)
 - `sof-firmware` (sound drivers)
+- `colorz` (optional but helps with color scheme)
+- `xorg-xev` (optional but helps with figuring X11 Keycodes)
