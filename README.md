@@ -50,6 +50,7 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `wireless_tools`
 - `pulseaudio`
 - `alsa-utils`
+- `usbutils`
 - `pulseaudio-alsa`
 - `feh`
 - `acpilight`
