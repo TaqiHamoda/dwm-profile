@@ -58,6 +58,7 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `xcompmgr`
 - `scrot`
 - `nano-syntax-highlighting`
+- `nemo`
 - `noto-fonts`
 - `ttf-jetbrains-mono-nerd`
 - `ttf-material-icons-git`
