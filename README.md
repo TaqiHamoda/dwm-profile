@@ -45,6 +45,7 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `xorg-xinit`
 - `xorg-xsetroot`
 - `xorg-xrandr`
+- `xss-lock`
 - `base-devel`
 - `net-tools`
 - `wireless_tools`
@@ -60,7 +61,6 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `noto-fonts`
 - `ttf-jetbrains-mono-nerd`
 - `ttf-material-icons-git`
-- `wmname` (needed to make Java programs work on dwm)
 - `mkinitcpio-firmware` (drivers that are not typically shipped with `linux-firmware`)
 - `sof-firmware` (sound drivers)
 - `colorz` (optional but helps with color scheme)
