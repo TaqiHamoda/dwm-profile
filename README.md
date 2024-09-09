@@ -4,20 +4,13 @@ This is my dwm profile. Still a work in progress but getting there
 
 ![DWM Environment](https://github.com/TaqieldinHamoda/dwm-profile/blob/main/Preview.png "A Preview of my DWM Environment")
 
-## Dot Files:
+## Dot Files
 - `.bashrc` belongs to `~/`
 - `.xinitrc` belongs to `~/`
 - `.nanorc` belongs to `~/`
 - `settings.ini` belongs to `~/.config/gtk-3.0/`
-- `slock.service` belongs to `/etc/systemd/system/`
 
-## Slock:
-For slock to work you need to run:
-```
-sudo groupadd nogroup
-```
-
-## Dark Mode:
+## Dark Mode
 To enable dark mode on all GTK applications, run the following command:
 
 ```
@@ -25,19 +18,44 @@ gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 ```
 
 ## Xbacklight keybindings
-By default, only `root` can change the brightness using `xbacklight`. To allow regular users to change the brightness, you must add the user to the `video` group and create a udev rule as follows:
+By default, only `root` can change the brightness using `xbacklight`. To allow regular users to change the brightness, you must first add the user to the `video` group
 
 ```
-# Add user to video group
 sudo usermod -a -G video username
 ```
 
+and create a udev rule in `/etc/udev/rules.d/backlight.rules` that allows members of the `video` group to modify the systems brightness.
+
 ```
-# Edit /etc/udev/rules.d/backlight.rules
 ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brightness", RUN+="/bin/chmod g+w $sys$devpath/brightness"
 ```
 
-## Packages Required:
+## Undervolting
+Undervolting laptops reduces power usage, extends battery life, lowers temperatures, and prolongs hardware lifespan. To start, install the `throttled` library and run its service. **DO NOT ENABLE THE SERVICE DURING TUNING. ALWAYS MONITOR TEMPERATURES.**
+
+Tune the system in `5 mV` increments/decrements. Use the `stress` library to test all CPU cores. After each adjustment, run the test for a few minutes. If you notice glitches, lags or crashes, restart your PC to disable undervolting. Reduce the adjustment value until stability is achieved.
+
+Repeat the above for the GPU using `glmark2`. Once optimal GPU settings are found, run both stress tests, adjusting only the GPU values until stable. Afterwards, run both tests for several hours to ensure long-term stability. Keep your PC cool (use an ice pack) and monitor its temperature. Once stable, save your `throttled` config and enable the service.
+
+Here’s my current `throttled` config. **Important**: Do not use my values! Start undervolting from scratch, carefully and slowly. Even with the same system, slight undervolting can cause crashes.
+
+```
+# All voltage values are expressed in mV and *MUST* be negative (i.e. undervolt)!
+# The values for CPU core and CPU cache should be EXACTLY the same.
+[UNDERVOLT]
+# CPU core voltage offset (mV)
+CORE: -120
+# Integrated GPU voltage offset (mV)
+GPU: -100
+# CPU cache voltage offset (mV)
+CACHE: -120
+# System Agent (RAM) voltage offset (mV)
+UNCORE: 0
+# Analog I/O voltage offset (mV)
+ANALOGIO: 0
+```
+
+## Packages Required
 This is a list of the packages required for this implementation to work on my current build.
 My build is an Asus Zenbook UM431D running Arch Linux
 
