@@ -31,6 +31,8 @@ ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video $sys$devpath/brigh
 ```
 
 ## Undervolting
+**Note:** This guide only applies if your laptop is supported by the [`throttled`](https://github.com/erpalma/throttled) library. It is recommended to always follow the official [Arch Linux Guide](https://wiki.archlinux.org/title/Undervolting_CPU), especially if your PC isn't supported by `throttled`.
+
 Undervolting laptops reduces power usage, extends battery life, lowers temperatures, and prolongs hardware lifespan. To start, install the `throttled` library and run its service. **DO NOT ENABLE THE SERVICE DURING TUNING. ALWAYS MONITOR TEMPERATURES.**
 
 Tune the system in `5 mV` increments/decrements. Use the `stress` library to test all CPU cores. After each adjustment, run the test for a few minutes. If you notice glitches, lags or crashes, restart your PC to disable undervolting. Reduce the adjustment value until stability is achieved.
