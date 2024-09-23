@@ -43,14 +43,14 @@ Here’s my current `throttled` config. **Important**: Do not use my values! Sta
 
 ```
 # All voltage values are expressed in mV and *MUST* be negative (i.e. undervolt)!
-# The values for CPU core and CPU cache should be EXACTLY the same.
+# The values for CPU core and CPU cache should be *EXACTLY* the same.
 [UNDERVOLT]
 # CPU core voltage offset (mV)
-CORE: -120
+CORE: -100
 # Integrated GPU voltage offset (mV)
 GPU: -100
 # CPU cache voltage offset (mV)
-CACHE: -120
+CACHE: -100
 # System Agent (RAM) voltage offset (mV)
 UNCORE: 0
 # Analog I/O voltage offset (mV)
