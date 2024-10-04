@@ -58,6 +58,7 @@ ANALOGIO: 0
 ```
 
 ## Packages Required
+
 This is a list of the packages required for this implementation to work on my current build.
 My build is an Asus Zenbook UM431D running Arch Linux
 
@@ -82,7 +83,21 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `noto-fonts`
 - `ttf-jetbrains-mono-nerd`
 - `ttf-material-icons-git`
+- `pacman-contrib`
 - `mkinitcpio-firmware` (drivers that are not typically shipped with `linux-firmware`)
 - `sof-firmware` (sound drivers)
 - `colorz` (optional but helps with color scheme)
 - `xorg-xev` (optional but helps with figuring X11 Keycodes)
+
+### Enabling `multilib`
+The `multilib` Arch repository contains useful packages such as the video graphics drivers for OpenGL `lib32-mesa` or the `wine` package. To enable multilib repository, uncomment the `[multilib]` section in `/etc/pacman.conf`: 
+
+```
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+```
+
+### Setting `paccache` timer
+Typically, `pacman` doesn't clean its cache folder and lets it grow indefinitely until the disk is filled. As such, the `paccache` script is needed to constantly prune the cache bulidup. Begin by enabling and starting the `paccache.timer` so that the cache is cleaned weekly.
+
+By default, `paccache` keeps the three most recent version of an installed package. To only keep the most recent version, use the `paccache -rk1` command. To remove the cache of all uninstalled packages, use `paccache -ruk0`.
