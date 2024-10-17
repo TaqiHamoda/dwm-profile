@@ -78,6 +78,7 @@ My build is an Asus Zenbook UM431D running Arch Linux
 - `acpilight`
 - `xcompmgr`
 - `scrot`
+- `mons` (For easy switching between displays)
 - `nano-syntax-highlighting`
 - `nemo`
 - `noto-fonts`
